@@ -1,0 +1,18 @@
+{% load static %}
+
+<footer class="py-2 text-white bg-info" style="margin-bottom: 0; height: 100;">
+    <div class="row justify-content-center " style="height:50px; padding: 10px">
+        {% if profile.instagram %}
+            <a href="{{profile.instagram}}" class="ml-4"><img src="{% static 'images/insta.svg' %}" alt="..."></a>
+        {% endif %}
+        {% if profile.twitter %}
+            <a href="{{profile.twitter}}" class="ml-4"><img src="{% static 'images/twitter.svg' %}" alt="..."></a>
+        {% endif %}
+        {% if profile.linkedin %}
+            <a href="{{profile.linkedin}}" class="ml-4"><img src="{% static 'images/linkedin.svg' %}" alt="..."></a>
+        {% endif %}
+        {% if not profile.instagram and not profile.twitter and not profile.linkedin %}
+            Made with Love
+        {% endif %}
+    </div>
+</footer>

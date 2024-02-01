@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	Resume
+{% endblock %}
+
+{% block content %}
+	{% include 'header.html' %}
+	<div class="container">
+		<div class="row" style="margin-top: 12rem; margin-bottom: 10%;">
+			<div class="col-md-6  mt-3">
+				<div style="float: right;" >
+					<h1 style="font-size: 2em;">{{profile.title}}</h1>
+					<p class="text-left mt-4">
+		 				 {{profile.bio|linebreaksbr}}
+      				</p>
+				</div>
+				{% if profile.cv %}
+				<div class="row">
+					<div class="col-md-4 m-1">
+	                  <a download href="{{profile.cv.url}}" class="btn btn-lg btn-primary mr-1">Download Resume</a>
+	                </div>
+					<div class="col-md-4 m-1">
+						<a class="btn btn-lg btn-info ml-1" href="{% url 'contact_me' %}">Contact</a>
+					  </div>
+                </div>
+				{% endif %}
+			</div>
+			<div class="col-md-6 text-center mt-3">
+				<img style="border-radius: 50%;" class="img shadow-lg" width="300" height="300" src="{{profile.avatar.url}}">
+			</div>
+		</div>
+		<h3 class="text-center m-4 text-primary">My Skills</h3>
+		<div class="row mt-4" style="margin-bottom: 10%;">
+		{% for skill in skills %}
+		{% if skill %}
+				<div class="col-md-8">
+					<label class="mt-4">{{skill.name}} <span class="badge badge-pill badge-primary m-1">{{skill.score}}%</span></label>
+					<div class="progress">
+						<div id="flask" class="progress-bar bg-warning text-dark " style="width: 80%; border-radius: 30px"></div>
+					</div>	
+				</div>
+		{% endif %}
+		{% endfor %}
+		</div>
+		<h3 class="text-center m-4">My Projects</h3>
+		<div class="col-md-12 mt-5">
+		<div class="row justify-content-center" >
+			{% for project in profile.project_set.all %}
+			<div class="col-md-4" style="margin-bottom: 7%">
+				<div class="card shadow">
+					<img class="card-img rounded mb-3" src="{{project.photo.url}}">
+					<div class="card-body">
+						<a href="{% url 'project' project.id %}" target="_blank" style="text-decoration: none;">
+						<div class="card-title mt-3 mb-3">{{project.name}}</div>
+						<p>{{project.description |truncatewords:15 |linebreaks}}</p>
+						</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+{% include 'footer.html' %}
+</div>
+{% endblock %}

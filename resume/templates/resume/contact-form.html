@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+    contact me
+{% endblock %}
+
+{% block content %}
+{% include 'header.html' %}
+<div class="container-fluid d-flex justify-content-center align-items-center h-100" style="margin-top: 10%;">
+    <div class="col-md-6">
+        <div class="card p-5  py-4">
+            <h4 class="text-center m-5">Contact me</h4>
+            <form method="post" action="">
+                {% csrf_token %}
+                {% for field in form %}
+                <label for="{{field.label}}">{{field.label}}</label>
+                   {{field}}  
+                {% endfor %}          
+                   <button class="btn btn-primary">Send!</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
